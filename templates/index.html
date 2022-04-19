@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .rectangle {
+            height: 50px;
+            width: 100px;
+            border: 20;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <img src="{{ url_for('static', filename='gfg-660x249.png') }}" style="width: 800px;">
+    {% for color in colors %}
+    <div class="rectangle" style="background-color: rgb{{ color }}">{{ color }}</div>
+    {% endfor %}
+</body>
+
+</html>
