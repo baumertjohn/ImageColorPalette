@@ -15,6 +15,7 @@ def percent_colors(working_img):
     number_of_colors = KMeans(
         n_clusters=10
     )  # This determines the number of colors to look for
+    working_img = resize_image(working_img)
     working_img = cv.cvtColor(working_img, cv.COLOR_BGR2RGB)
     k_cluster = number_of_colors.fit(working_img.reshape(-1, 3))
     n_pixels = len(k_cluster.labels_)
@@ -31,8 +32,28 @@ def percent_colors(working_img):
     return sorted(color_tuples, reverse=True)
 
 
+def resize_image(working_img):
+    """Check image height and width and resize if needed, otherwise return the
+    original image"""
+    max_width, max_height = 480, 640  # Maximum dims of image to process
+    if working_img.shape[0] > max_width:  # Check image height
+        scale_value = max_width / working_img.shape[0]
+        new_height = int(working_img.shape[0] * scale_value)
+        new_width = int(working_img.shape[1] * scale_value)
+        new_dims = (new_height, new_width)
+        return cv.resize(working_img, new_dims, interpolation=cv.INTER_AREA)
+    elif working_img.shape[1] > max_height:  # Check image width
+        scale_value = max_height / working_img.shape[1]
+        new_width = int(working_img.shape[1] * scale_value)
+        new_height = int(working_img.shape[0] * scale_value)
+        new_dims = (new_height, new_width)
+        return cv.resize(working_img, new_dims, interpolation=cv.INTER_AREA)
+    else:
+        return working_img
+
+
 def main():
-    img = cv.imread("./gfg-660x249.png")
+    img = cv.imread("./test/gfg-660x249.png")
     # img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
 
     # Method 3.1 - Using K-Means clustering + Proportion display

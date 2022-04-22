@@ -2,9 +2,11 @@
 {% set title = 'Image Color Finder' %}
 {% block content %}
 
-<form action="http://localhost:5000/" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" />
-    <input type="submit" />
-</form>
+<div style="text-align: center;">
+    <form action="http://localhost:5000/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <input type="submit" />
+    </form>
+</div>
 
 {% endblock %}

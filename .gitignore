@@ -154,3 +154,5 @@ cython_debug/
 # Added by me
 /test
 /.vscode
+
+/working_image
