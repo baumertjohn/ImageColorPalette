@@ -1,0 +1,18 @@
+/* Show footer at bottom of page when content is too short to fill */
+.short_content {
+  min-height: calc(100vh - 110px);
+}
+
+.footer {
+  margin: 0px 0px 0px;
+  text-align: center;
+  padding: 15px;
+}
+
+body {
+  background-color: #f7f9f9;
+}
+
+.card {
+  background-color: #f7f9f9;
+}

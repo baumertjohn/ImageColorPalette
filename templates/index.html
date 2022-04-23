@@ -2,11 +2,24 @@
 {% set title = 'Image Color Finder' %}
 {% block content %}
 
-<div style="text-align: center;">
-    <form action="http://localhost:5000/" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" />
-        <input type="submit" />
-    </form>
+<div class="short_content" style="width:auto; margin:0 auto;">
+    <div class="card text-center border-0">
+        <div class="card-body">
+            <h2 class="" card-title">Image Color Finder</h2>
+            <p class="card-text">A simple app to find the top 10 common colors of a user uploaded image and display the
+                RGB color code and percentages of each.</p>
+            <br>
+            <form action="{{ url_for('home') }}" method="post" enctype="multipart/form-data"
+                style="width:50%; margin:0 auto">
+                <div>
+                    <!-- <label for="formFileLg" class="form-label">Large file input example</label> -->
+                    <input class="form-control" name="file" type="file" required="required" />
+                </div>
+                <br>
+                <button type="submit" class="btn btn-secondary">Upload</button>
+            </form>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
