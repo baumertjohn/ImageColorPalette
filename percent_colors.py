@@ -50,20 +50,3 @@ def resize_image(working_img):
         return cv.resize(working_img, new_dims, interpolation=cv.INTER_AREA)
     else:
         return working_img
-
-
-def main():
-    img = cv.imread("./test/gfg-660x249.png")
-    # img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
-
-    # Method 3.1 - Using K-Means clustering + Proportion display
-    # ten_colors = percent_colors(NUMBER_OF_COLORS.fit(img.reshape(-1, 3)))
-
-    ten_colors = percent_colors(img)
-
-    for color in ten_colors:
-        print(color)
-
-
-if __name__ == "__main__":
-    main()

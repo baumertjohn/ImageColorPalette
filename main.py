@@ -13,27 +13,39 @@ from werkzeug.utils import secure_filename
 from percent_colors import percent_colors
 
 UPLOAD_FOLDER = "./working_image"
-ALLOWED_EXTENSIONS = {"jpg", "png"}
+ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png"}
+
+
+def allowed_file(filename):
+    """Takes a filename and checks for image extension."""
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-app.config["MAX_CONTENT_PATH"] = 1_000_000
 
 
 @app.route("/", methods=["GET", "POST"])
 def home():
+    error = None
+    # Clear upload folder and create empty before uploading file
+    try:
+        shutil.rmtree(UPLOAD_FOLDER)
+    except FileNotFoundError:
+        pass
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
     if request.method == "POST":
-        # Clear upload folder and create empty before uploading file
-        try:
-            shutil.rmtree(UPLOAD_FOLDER)
-        except FileNotFoundError:
-            pass
-        os.makedirs(UPLOAD_FOLDER, exist_ok=True)
         file = request.files["file"]
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-        return redirect(url_for("show_image", user_image=filename))
-    return render_template("index.html")
+        if allowed_file(file.filename):
+
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+            return redirect(url_for("show_image", user_image=filename))
+        else:
+            error = (
+                'Please choose a image file with extension ".jpg", ".jpeg", or ".png".'
+            )
+    return render_template("index.html", error=error)
 
 
 @app.route("/showimage/<user_image>")

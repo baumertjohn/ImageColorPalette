@@ -27,7 +27,13 @@
                                     style="fill:rgb{{ color[1] }}; stroke:black; stroke-width:1" />
                             </svg>
                         </td>
-                        <td>{{ color[0] }}%</td>
+                        <td>
+                            {% if color[0] == 0 %}
+                            &#60;1%
+                            {% else %}
+                            {{ color[0] }}%
+                            {% endif %}
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

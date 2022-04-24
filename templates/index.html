@@ -9,11 +9,20 @@
             <p class="card-text">A simple app to find the top 10 common colors of a user uploaded image and display the
                 RGB color code and percentages of each.</p>
             <br>
+            <div>
+                {% if error %}
+                <div class="alert alert-danger">
+                    {{ error }}
+                    <br>
+                </div>
+                {% endif %}
+            </div>
             <form action="{{ url_for('home') }}" method="post" enctype="multipart/form-data"
                 style="width:50%; margin:0 auto">
                 <div>
-                    <!-- <label for="formFileLg" class="form-label">Large file input example</label> -->
-                    <input class="form-control" name="file" type="file" required="required" />
+                    <label for="formFile" class="col-form-label-sm">(".jpg", ".jpeg", or ".png" for input.)</label>
+                    <input class="form-control" id="formFile" name="file" type="file" required="required"
+                        accept=".jpg,.jpeg,.png" />
                 </div>
                 <br>
                 <button type="submit" class="btn btn-secondary">Upload</button>
