@@ -25,7 +25,8 @@
                         accept=".jpg,.jpeg,.png" />
                 </div>
                 <br>
-                <button type="submit" class="btn btn-secondary">Upload</button>
+                <button type="submit" id="submut" class="btn btn-secondary"
+                    onClick="document.getElementById('submit').disabled=true; document.getElementById('submit').innerHTML = 'Processing...'">Upload</button>
             </form>
         </div>
     </div>
