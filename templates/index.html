@@ -17,16 +17,15 @@
                 </div>
                 {% endif %}
             </div>
-            <form action="{{ url_for('home') }}" method="post" enctype="multipart/form-data"
-                style="width:50%; margin:0 auto">
+            <form action="{{ url_for('home') }}" method="post" enctype="multipart/form-data" style="width:50%; margin:0 auto"
+                onSubmit="document.getElementById('submit').disabled=true; document.getElementById('submit').innerHTML = 'Processing...'">
                 <div>
                     <label for="formFile" class="col-form-label-sm">(".jpg", ".jpeg", or ".png" for input.)</label>
                     <input class="form-control" id="formFile" name="file" type="file" required="required"
                         accept=".jpg,.jpeg,.png" />
                 </div>
                 <br>
-                <button type="submit" id="submut" class="btn btn-secondary"
-                    onClick="document.getElementById('submit').disabled=true; document.getElementById('submit').innerHTML = 'Processing...'">Upload</button>
+                <button type="submit" id="submit" class="btn btn-secondary">Upload</button>
             </form>
         </div>
     </div>
